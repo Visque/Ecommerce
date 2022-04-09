@@ -1,0 +1,25 @@
+<div class="header flex">
+  <h1>Ecommerce Website :)</h1>
+  <div class="flex">
+      <div class="profile-pic">
+          <img src="<%= dp %> " alt="">
+      </div>
+      <div class="dropdown">
+            <button onclick="dropDown()" class="dropbtn">
+                <div class="dropDown-btn flex">
+                    <span style="font-weight: bold"> <%= userName %> </span>
+                    <img
+                    style="height: 25px"
+                    src="https://icon-library.com/images/dropdown-menu-icon/dropdown-menu-icon-12.jpg"
+                    alt=""
+                    />
+                </div>
+            </button>
+            <div id="my-Dropdown" class="dropdown-list flex-column hide">
+                <button class="logout-btn dropDown-item flex" id="logout-btn">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

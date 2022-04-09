@@ -1,0 +1,84 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: whitesmoke;
+}
+
+.header{
+    width: 100vw;
+    background-color: #D9E6F3;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header > h1{
+    padding: 0 10px;
+}
+
+.profile-pic, .profile-pic > *{
+    background-color: #D9E6F3;
+    opacity: 0.85;
+    height: 100px;
+}
+
+
+.dropDown-btn{
+    align-items: center;
+    justify-content: center;
+}
+
+.dropbtn{
+    font-size:medium;
+    height: 100px;
+    width: 150px;
+    background-color: #D9E6F3;
+
+    border: none;
+    border-radius: 3px;
+
+    transition: 0.2s ease-in-out;
+}
+
+.dropbtn:hover{
+    cursor: pointer;
+    background-color: #a9caeb;
+}
+
+.dropDown-list{
+    position: absolute;
+    
+}
+
+.dropDown-item{
+    text-decoration: none;
+    color: rgb(24, 23, 23);
+    background-color: #D9E6F3;
+    height: 50px;
+    width: 150px;
+
+    border-radius: 3px;
+    border: none;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.dropDown-item:hover{
+    cursor: pointer;
+    background-color: #a9caeb;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.hide{
+    display: none;
+}
