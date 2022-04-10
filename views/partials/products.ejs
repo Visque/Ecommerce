@@ -1,0 +1,20 @@
+<div class="container flex-column">
+        <% if (productList.length) { %>
+            <div id="product-container" class="product-container flex">
+                <% for( let index = 0; index < productList.length; index++ ) { %>
+                    <div class="product-item flex-column">
+                        <img src="<%= productList[index].image %>" class="product-image">
+                        <div class="product-name"> <%= productList[index].name %> </div>
+                        <div class="product-price hide"> <span class="description-span"> Rs </span> <span> <%= productList[index].price %> </span> </div>
+                        <div class="product-description hide"> <span class="description-span"> Desc:  </span> <span> <%= productList[index].description %> </span> </div>
+                        <button id="product-details" class="product-details btn"> Show Details </button>
+                    </div>
+                <% } %>
+            </div>
+            <% if (loadMore) { %>
+                <button id="loadMore-btn" class="loadMore-btn btn"> Load More </button>
+            <% } %>
+        <% } else { %>
+            <h2 style="color: #ff0000;">No Products Available</h2>
+        <% } %>
+    </div>

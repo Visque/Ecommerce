@@ -7,6 +7,7 @@ body{
 
 .header{
     width: 100vw;
+    height: 10vh;
     background-color: #D9E6F3;
 
     justify-content: space-between;
@@ -19,8 +20,8 @@ body{
 
 .profile-pic, .profile-pic > *{
     background-color: #D9E6F3;
-    opacity: 0.85;
-    height: 100px;
+    opacity: 0.925;
+    height: 10vh;
 }
 
 
@@ -31,7 +32,7 @@ body{
 
 .dropbtn{
     font-size:medium;
-    height: 100px;
+    height: 10vh;
     width: 150px;
     background-color: #D9E6F3;
 
@@ -68,6 +69,103 @@ body{
 .dropDown-item:hover{
     cursor: pointer;
     background-color: #a9caeb;
+}
+
+
+
+.container{
+    min-height: 90vh;
+    height: auto;
+    background-color: #0E2A36;
+}
+
+.product-container{
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: auto;
+}
+
+.product-item{
+    color: aliceblue;
+    margin: 1rem 1.5rem;
+    padding: 15px 0px 0 0px;
+    background-color: #2d4651;
+    height: auto;
+    min-height: 220px;
+    width: auto;
+    min-width: 280px;
+    max-width: 450px;
+    border: none;
+    border-radius: 10px;
+    flex: 1 1 inherit;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-image{
+    min-height: 150;
+    margin: 0 0.5rem;
+}
+
+.product-name{
+    font-size: 25px;
+    margin: 0.25rem 0;
+}
+
+.product-price{
+    font-size: 1.25em;
+    margin: 0.25rem 0;
+}
+
+.product-description{
+    font-size: 1.15em;
+    margin: 0.25rem 0;
+    padding: 0 0.5rem;
+}
+
+.product-details{
+    height: 2rem;
+    color: rgb(109, 177, 236);
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #2d4651;
+    transition: 0.2s ease-in-out;
+}
+
+.product-details:hover{
+    cursor: pointer;
+    color: #9eed97;
+    background-image: linear-gradient(to top, #b7f4b1, #2d4651, #2d4651);
+}
+
+.loadMore-btn{
+
+    font-size: large;
+    padding: 1rem auto;
+    margin: 0 2.5vw;
+    width: 95%;
+    border-radius: 10px;
+    border: none;
+    border-top: white 10px;
+    color: whitesmoke;
+    background-color: #0E2A36;
+    transition: 0.2s ease-in-out;
+}
+
+.loadMore-btn:hover{
+    cursor: pointer;
+    color: #9eed97;
+    background-color: #1f5a74;
+}
+
+.description-span{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-decoration: dotted;
+    color: #2ee88e;
 }
 
 .flex{

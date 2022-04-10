@@ -54,11 +54,20 @@ app.get('/', (req, res) => {
 
     if(req.session.isLoggedIn){                   // User is Valid
         getUserDp(userId, function(userDp){
-          console.log('users DP: ', userDp)
-          res.render("home.ejs", { name: req.session.userName, dp: userDp });
+          // console.log('users DP: ', userDp)
 
           // Get first 5 products
-          getFiveProducts(0)
+          getFiveProducts(0, function(arr){
+            req.session.prodIndex = 5;
+            var resList = arr[0];
+            var more = arr[1];
+            res.render("home.ejs", { 
+              name: req.session.userName, 
+              dp: userDp,
+              productList: resList, 
+              loadMore: more 
+            });
+          });
 
         });
     }
@@ -80,15 +89,15 @@ app.route('/signin')
         password: password
     }
     findUsers(data, function(user){
-        if(user){
-            console.log(`user is logged in: `, user)
+        if(user && user.password === password){
+            // console.log(`user is logged in: `, user)
             req.session.isLoggedIn = true;
             req.session.userName = userName;
             req.session.userId = user._id;
             res.redirect('/')
         }
         else{
-            console.log(`user couldn't log in: `, user);
+            // console.log(`user couldn't log in: `, user);
             res.render('auth/signin.ejs', {error: "Wrong Credentials"})
         }
     })
@@ -99,7 +108,7 @@ app.route("/signup")
   res.render("auth/signup", {error: ""});
 })
 .post(upload.single('displayPic'), (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     var userName = req.body.userName
     var email = req.body.email
     var password = req.body.password
@@ -118,14 +127,34 @@ app.route("/signup")
       displayPic: displayPic,
     };
 
-    insertUser(user, function(){
-        res.redirect('/signin')
-    })
+    findUsers(user, function (person) {
+      if (person) {
+        // console.log(`Duplicate: `, person);
+        res.render("auth/signup", {error: "UserName Taken"});
+      }
+      else {
+        // console.log('insertings user: ', user)
+        insertUser(user, function () {
+          res.redirect("/signin");
+        });
+      }
+    });
+
+    
 })
 
 app.get("/logout", (req, res) => {
     req.session.destroy()
     res.end();
+})
+
+app.get('/loadMore', (req, res) => {
+  getFiveProducts(req.session.prodIndex, function (arr) {
+    // console.log("type check: ", arr);
+    req.session.prodIndex = req.session.prodIndex + 5
+    res.send(JSON.stringify(arr));
+  });
+  // res.end("hello")
 })
 
 // Wrong Endpoint
@@ -144,8 +173,8 @@ function insertUser(data, callback){
 }
 
 function findUsers(data, callback){
-    console.log('log at findusers: ', data)
-    userModel.findOne({userName: data.userName, password: data.password}).then((user) => {
+    // console.log('log at findusers: ', data)
+    userModel.findOne({userName: data.userName}).then((user) => {
         callback(user);
     })
 }
@@ -158,8 +187,20 @@ function getUserDp(userId, callback){
   })
 }
 
-function getFiveProducts(idx){
-  fs.readF
+function getFiveProducts(idx, callback){
+  fs.readFile("./products.txt", "utf-8", (err, data) => {
+    // console.log('data', data)
+    var productList = data.length ? JSON.parse(data): []
+
+    var resList = []
+    var limit = idx + 5 >= productList.length ? productList.length : idx + 5
+    for(var i = idx; i < limit; ++i){
+      resList.push(productList[i])
+    }
+    var more = (productList.length / (idx + 5)) > 1 ? true : false
+    console.log("more check: ", more);
+    callback([resList, more])
+  })
 }
 
 // ServerListener
