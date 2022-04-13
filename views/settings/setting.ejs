@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/changePassword.css">
+    <link rel="stylesheet" href="styles/setting.css">
+    <title>settings</title>
+</head>
+<body>
+    
+    <%- include("../partials/header", {userName: name, dp: dp}) %>
+    <div class="container flex">
+        <div class="left-nav">
+            <div class="setting-list flex-column">
+                <div class="setting-item">
+                    <h3> Change Password </h3>
+                </div>
+            </div>
+        </div>
+        <div class="chosen-setting">
+            <div class="chosen-setting-item flex-column">
+                <%- include("changePassword", {error: error, postLogin: true}) %> 
+            </div>
+        </div>
+    </div>
+</body>
+<script src="scripts/header.js"></script>
+<script src="scripts/setting.js"></script>
+</html>

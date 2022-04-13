@@ -1,8 +1,8 @@
 <div class="header flex">
-  <h1>Ecommerce Website :)</h1>
+  <h1 ><a href="/">Ecommerce Website :)</a></h1>
   <div class="flex">
       <div class="profile-pic">
-          <img src="<%= dp %> " alt="Something went Wrong">
+          <img style="height: 10vh;" src="<%= dp %> " alt="Something went Wrong">
       </div>
       <div class="dropdown">
             <button onclick="dropDown()" class="dropbtn">
@@ -16,9 +16,12 @@
                 </div>
             </button>
             <div id="my-Dropdown" class="dropdown-list flex-column hide">
-                <button class="logout-btn dropDown-item flex" id="logout-btn">
+                <a href="/settings" class="settings-btn dropDown-item flex" id="settings-btn">
+                    Settings
+                </a>
+                <a href="/logout" class="logout-btn dropDown-item flex" id="logout-btn">
                     Logout
-                </button>
+                </a>
             </div>
         </div>
     </div>

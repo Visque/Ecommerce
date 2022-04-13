@@ -5,74 +5,6 @@ body{
     background-color: whitesmoke;
 }
 
-.header{
-    width: 100vw;
-    height: 10vh;
-    background-color: #D9E6F3;
-
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header > h1{
-    padding: 0 10px;
-}
-
-.profile-pic, .profile-pic > *{
-    background-color: #D9E6F3;
-    opacity: 0.925;
-    height: 10vh;
-}
-
-
-.dropDown-btn{
-    align-items: center;
-    justify-content: center;
-}
-
-.dropbtn{
-    font-size:medium;
-    height: 10vh;
-    width: 150px;
-    background-color: #D9E6F3;
-
-    border: none;
-    border-radius: 3px;
-
-    transition: 0.2s ease-in-out;
-}
-
-.dropbtn:hover{
-    cursor: pointer;
-    background-color: #a9caeb;
-}
-
-.dropDown-list{
-    position: absolute;
-    
-}
-
-.dropDown-item{
-    text-decoration: none;
-    color: rgb(24, 23, 23);
-    background-color: #D9E6F3;
-    height: 50px;
-    width: 150px;
-
-    border-radius: 3px;
-    border: none;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.dropDown-item:hover{
-    cursor: pointer;
-    background-color: #a9caeb;
-}
-
-
-
 .container{
     min-height: 90vh;
     height: auto;
@@ -96,7 +28,7 @@ body{
     min-height: 220px;
     width: auto;
     min-width: 280px;
-    max-width: 450px;
+    max-width: 380px;
     border: none;
     border-radius: 10px;
     flex: 1 1 inherit;
@@ -125,7 +57,15 @@ body{
     padding: 0 0.5rem;
 }
 
-.product-details{
+/* .product-details{
+    
+}
+
+.product-details:hover{
+    
+} */
+
+.product-function-holder{
     height: 2rem;
     color: rgb(109, 177, 236);
     width: 100%;
@@ -135,7 +75,7 @@ body{
     transition: 0.2s ease-in-out;
 }
 
-.product-details:hover{
+.product-function-holder:hover{
     cursor: pointer;
     color: #9eed97;
     background-image: linear-gradient(to top, #b7f4b1, #2d4651, #2d4651);

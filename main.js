@@ -5,6 +5,7 @@ const session = require("express-session");
 const fs = require("fs");
 const multer = require("multer");
 const morgan = require("morgan");
+const sendMail = require("./utils/mailSender");
 
 // Db Imports
 const db = require("./database")
@@ -88,19 +89,21 @@ app.route('/signin')
         userName: userName,
         password: password
     }
-    findUsers(data, function(user){
-        if(user && user.password === password){
-            // console.log(`user is logged in: `, user)
-            req.session.isLoggedIn = true;
-            req.session.userName = userName;
-            req.session.userId = user._id;
-            res.redirect('/')
-        }
-        else{
-            // console.log(`user couldn't log in: `, user);
-            res.render('auth/signin.ejs', {error: "Wrong Credentials"})
-        }
-    })
+    findUsers({ userName: data.userName }, function (user) {
+      if (user && user.password === password) {
+        // console.log(`user is logged in: `, user)
+        req.session.isLoggedIn = true;
+        req.session.userName = userName;
+        req.session.userId = user._id;
+
+        if (user.emailVerified) res.redirect("/");
+        else
+          res.render("auth/signin.ejs", { error: "Please Verify your Email" });
+      } else {
+        // console.log(`user couldn't log in: `, user);
+        res.render("auth/signin.ejs", { error: "Wrong Credentials" });
+      }
+    });
 })
 
 app.route("/signup")
@@ -125,27 +128,127 @@ app.route("/signup")
       email: email,
       password: password,
       displayPic: displayPic,
+      emailVerified: false,
     };
 
-    findUsers(user, function (person) {
+    findUsers({ userName: user.userName }, function (person) {
       if (person) {
         // console.log(`Duplicate: `, person);
-        res.render("auth/signup", {error: "UserName Taken"});
-      }
-      else {
+        res.render("auth/signup", { error: "UserName Taken" });
+      } else {
         // console.log('insertings user: ', user)
+
+        // Email verification :)
+
         insertUser(user, function () {
-          res.redirect("/signin");
+          var html = '<h1>Click here to verify your email address: <a href="http://localhost:3000/email-verification/'+userName+'">click here</a></h1> <br> <h5>This is for developement purposes only IGNORE if it is irrelevent (must be sent to you by mistake) to you. You do not need to click the link but incase if you do not need to worry since it does nothing ( development site :) ). Sorry for the inconvenience :(</h5>';
+          console.log("html: ", html);
+          sendMail(email, html, function (error) {
+            if (error) {
+              console.log(error);
+              res.render("auth/signup", {error: error});
+            } else {
+              console.log("mail has been sent");
+              res.redirect("/signin");
+            }
+          });
         });
       }
     });
+})
 
-    
+app.get("/email-verification/:userName", (req, res) => {
+  var userName = req.params.userName;
+
+  userModel.findOneAndUpdate({userName: userName}, {emailVerified: true}).then(() => {
+    res.redirect("/signin")
+  });
+});
+
+app.route("/forgot-password")
+.get((req, res) => {
+  res.render("auth/forgot-password.ejs", {error: ""})
+})
+.post((req, res) => {
+  var userEmail = req.body.email;
+
+  findUsers({ email: userEmail }, function(user){
+    var userId = user._id;
+    var html = '<h1>Click here to Reset your Password: <a href="http://localhost:3000/forgot-password/change-password/'+userId+'">click here</a></h1> <br> <h5>This is for developement purposes only IGNORE if it is irrelevent (must be sent to you by mistake) to you. You do not need to click the link but incase if you do not need to worry since it does nothing ( development site :) ). Sorry for the inconvenience :(</h5>';
+    console.log("html: ", html)
+    sendMail(userEmail, html, function(error){
+      if (error) {
+        console.log(error);
+        res.render("auth/signup", { error: error });
+      } else {
+        console.log("mail has been sent");
+        res.render("auth/forgot-password", {error: "check Email"});
+      }
+    })
+  })
+
+})
+
+app.route("/forgot-password/change-password/:userId")
+.get((req, res) => {
+  // var userId = getUserId(req.params.email)
+  // sb user detail
+  console.log('user ID at get forgot/change: ', req.params.userId);
+  res.render("settings/changePassword.ejs", {error: false, postLogin: false, userId: req.params.userId})
+})
+.post((req, res) => {
+  var userId = req.params.userId;
+  console.log()
+  var newPassword = req.body.newPassword;
+  var confirmPassword = req.body.confirmPassword;
+
+  if (newPassword !== confirmPassword) {
+    res.render("settings/changePassword.ejs", { postLogin: false, error: "Password Dont Match", userId: userId });
+    return;
+  }
+
+  updateUser(userId, { password: newPassword }, function () {
+    res.redirect("/");
+  });
 })
 
 app.get("/logout", (req, res) => {
     req.session.destroy()
-    res.end();
+    res.redirect("/");
+}) 
+
+app.get("/settings", (req, res) => {
+
+  if(!req.session.isLoggedIn){
+    res.redirect('/')
+    return;
+  } 
+  var userId = req.session.userId;
+  console.log("userID: ", userId, req.session.userName);
+
+  getUserDp(userId, function(userDp){
+    res.render("settings/setting.ejs", {name: req.session.userName, dp: userDp, error: false})
+  })
+})
+
+app.post("/updatePassword", (req, res) => {
+  var userId = req.session.userId;
+  var newPassword = req.body.newPassword;
+  var confirmPassword = req.body.confirmPassword;
+
+  if(newPassword !== confirmPassword){
+    getUserDp(userId, function(userDp){
+      res.render("settings/setting.ejs", {name: req.session.userName, dp: userDp, error: "Password Dont Match"})
+    })
+    return;
+  }
+
+  getUserDp(userId, function(userDp){
+    updateUser(userId, {password: newPassword}, function(){
+
+      res.redirect("/logout")
+    })
+  })
 })
 
 app.get('/loadMore', (req, res) => {
@@ -172,11 +275,17 @@ function insertUser(data, callback){
     });
 }
 
-function findUsers(data, callback){
+function findUsers(findCondition, callback){
     // console.log('log at findusers: ', data)
-    userModel.findOne({userName: data.userName}).then((user) => {
+    userModel.findOne(findCondition).then((user) => {
         callback(user);
     })
+}
+
+function updateUser(userId, updateValue, callback){
+  userModel.findByIdAndUpdate(userId, updateValue).then(() => {
+    callback();
+  })
 }
 
 function getUserDp(userId, callback){
@@ -208,3 +317,6 @@ app.listen(PORT, () => {
     console.log(`Server is Live and running :)`)
 })
 
+
+
+// forget-password/change-password/NaN          error in changePassword.ejs probably :)

@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema(
     displayPic: {
       type: String,
     },
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true }
 );
