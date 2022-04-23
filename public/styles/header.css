@@ -1,69 +1,75 @@
-.header{
-    width: 100vw;
-    height: 10vh;
-    background-color: #D9E6F3;
+.header {
+  width: 100vw;
+  height: 10vh;
+  background-color: #d9e6f3;
 
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.header > h1{
-    padding: 0 10px;
+/* .box{
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+} */
+
+.header > h1 {
+  padding: 0 10px;
 }
 
-.profile-pic, .profile-pic > *{
-    background-color: #D9E6F3;
-    opacity: 0.925;
-    height: 10vh;
+.profile-pic,
+.profile-pic > * {
+  background-color: #d9e6f3;
+  opacity: 0.925;
+  height: 10vh;
 }
 
-
-.dropDown-btn{
-    align-items: center;
-    justify-content: center;
+.dropDown-btn {
+  align-items: center;
+  justify-content: center;
 }
 
-.dropbtn{
-    font-size:medium;
-    height: 10vh;
-    width: 150px;
-    background-color: #D9E6F3;
+.dropbtn {
+  font-size: medium;
+  height: 10vh;
+  width: 150px;
+  background-color: #d9e6f3;
 
-    border: none;
-    border-radius: 3px;
+  border: none;
+  border-radius: 3px;
 
-    transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
-.dropbtn:hover{
-    cursor: pointer;
-    background-color: #a9caeb;
+.dropbtn:hover {
+  cursor: pointer;
+  background-color: #a9caeb;
 }
 
-.dropDown-list{
-    position: absolute;
+.dropDown-list {
+  position: absolute;
 }
 
-.dropDown-item{
-    text-decoration: none;
-    color: rgb(24, 23, 23);
-    background-color: #D9E6F3;
-    height: 50px;
-    width: 150px;
+.dropDown-item {
+  text-decoration: none;
+  color: rgb(24, 23, 23);
+  background-color: #d9e6f3;
+  height: 50px;
+  width: 150px;
 
-    border-radius: 3px;
-    border: none;
+  border-radius: 3px;
+  border: none;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
-.dropDown-item:hover{
-    cursor: pointer;
-    background-color: #a9caeb;
+.dropDown-item:hover {
+  cursor: pointer;
+  background-color: #a9caeb;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a {
+  text-decoration: none;
+  color: inherit;
 }

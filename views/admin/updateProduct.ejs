@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="styles/home.css" />
+<div id="container" class="container flex-column">
+  <% if (productList.length) { %>
+  <div id="product-container" class="product-container flex">
+    <% for( let index = 0; index < productList.length; index++ ) { %>
+
+    <div class="product-item change-password-form flex-column" key="<%= productList[index]._id %>">
+      
+        <img src="<%= productList[index].productImg %>" class="product-image" />
+        <div class="product-name flex">
+          <input
+            type="text"
+            name="name"
+            value="<%= productList[index].productName %>"
+            placeholder="Enter Product Name"
+          />
+        </div>
+        <div class="product-price flex">
+          <input
+            type="text"
+            name="price"
+            value="<%= productList[index].productPrice %>"
+            placeholder="Enter Product Price"
+          />
+        </div>
+        <div class="product-quantity flex">
+          <input
+            class="product-quantity-change"
+            type="number"
+            min="0"
+            name="quantity"
+            value="<%= productList[index].productQuantity %>"
+            placeholder="Enter product quantity"
+          />
+        </div>
+        <div class="product-description flex">
+          <input
+            type="text"
+            name="description"
+            placeholder="Enter Product Description"
+            value="<%= productList[index].productDescription %>"
+          />
+        </div>
+        <div class="flex button-container">
+            <button id="delete-btn" class="delete-btn btn danger" type="submit">Delete</button>
+            <button id="update-btn" class="update-btn btn safe" type="submit">Update</button>
+        </div>
+    </div>
+
+    <% } %>
+  </div>
+  <% } else { %>
+  <h2 style="color: #ff0000">No Products Added</h2>
+  <% } %>
+</div>
+<script src="scripts/updateProduct.js"></script>

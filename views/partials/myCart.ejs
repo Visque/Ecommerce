@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Cart</title>
+    <link rel="stylesheet" href="styles/home.css" />
+  </head>
+  <body>
+    <%- include("header.ejs", {userName: userName, dp: userDp}) %>
+    <div id="container" class="container flex-column">
+      <% if (productList.length) { %>
+      <div id="product-container" class="product-container flex">
+        <% for( let index = 0; index < productList.length; index++ ) { %>
+        <div class="product-item flex-column" cartKey="<%= productList[index]._id %>" ProductKey="<%= productList[index].productId._id %>">
+          <img
+            src="<%= productList[index].productId.productImg %>"
+            class="product-image"
+          />
+          <div class="product-name"><%= productList[index].productId.productName %></div>
+          <div class="product-price">
+            <span class="description-span"> Rs </span>
+            <span> <%= productList[index].productId.productPrice * productList[index].productQuantity %> </span>
+          </div>
+          <div class="product-quantity hide">
+            <span class="description-span"> Quantity </span>
+            <span> 
+                <input
+                    class="product-quantity-change"
+                    type="number"
+                    min="1"
+                    max="<%= productList[index].productId.productQuantity %>"
+                    name="quantity"
+                    value="<%= productList[index].productQuantity %>"
+                    placeholder="Enter product quantity"
+                />    
+            </span>
+          </div>
+          <div class="product-description hide">
+            <span class="description-span"> Desc: </span>
+            <span> <%= productList[index].productId.productDescription %> </span>
+          </div>
+          <div class="cart-detail-container flex">
+            <button class="remove-from-cart product-function-holder">
+              Remove From Cart
+            </button>
+            <button
+              id="product-details"
+              class="product-details product-function-holder btn"
+            >
+              Show Details
+            </button>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <% if (loadMore) { %>
+      <button id="loadMore-btn" class="loadMore-btn btn">Load More</button>
+      <% } %> <% } else { %>
+      <h2 style="color: #ff0000; margin-left: 10px">Cart Is Empty</h2>
+      <% } %>
+    </div>
+  </body>
+  <script src="scripts/cart.js"></script>
+</html>

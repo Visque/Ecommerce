@@ -1,13 +1,16 @@
-<div class="container flex-column">
+<div id="container" class="container flex-column">
     <% if (productList.length) { %>
         <div id="product-container" class="product-container flex">
             <% for( let index = 0; index < productList.length; index++ ) { %>
-                <div class="product-item flex-column">
-                    <img src="<%= productList[index].image %>" class="product-image">
-                    <div class="product-name"> <%= productList[index].name %> </div>
-                    <div class="product-price"> <span class="description-span"> Rs </span> <span> <%= productList[index].price %> </span> </div>
-                    <div class="product-description hide"> <span class="description-span"> Desc:  </span> <span> <%= productList[index].description %> </span> </div>
-                    <div class="flex" style="justify-content: space-between; width: 100%;">
+                <div class="product-item flex-column" key="<%= productList[index]._id %>">
+                    <img src="<%= productList[index].productImg %>" class="product-image">
+                    <div class="product-name"> <%= productList[index].productName %> </div>
+                    <div class="product-price"> <span class="description-span"> Rs </span> <span> <%= productList[index].productPrice %> </span> </div>
+                    <div class="product-quantity hide">
+                        <span class="description-span"> Quantity:  </span> <span> <%= productList[index].productQuantity %>
+                    </div>
+                    <div class="product-description hide"> <span class="description-span"> Desc:  </span> <span> <%= productList[index].productDescription %> </span> </div>
+                    <div class="cart-detail-container flex">
                         <button class="add-to-cart product-function-holder">Add To Cart</button>
                         <button id="product-details" class="product-details product-function-holder btn"> Show Details </button>
                     </div>
@@ -21,3 +24,4 @@
         <h2 style="color: #ff0000;">No Products Available</h2>
     <% } %>
 </div>
+<script src="scripts/products.js"></script>

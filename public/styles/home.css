@@ -1,60 +1,63 @@
-body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: whitesmoke;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: whitesmoke;
 }
 
-.container{
-    min-height: 90vh;
-    height: auto;
-    background-color: #0E2A36;
+.container {
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 90vh;
+  height: auto;
+  width: auto;
+  background-color: #202124;
 }
 
-.product-container{
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: auto;
+.product-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: auto;
 }
 
-.product-item{
-    color: aliceblue;
-    margin: 1rem 1.5rem;
-    padding: 15px 0px 0 0px;
-    background-color: #2d4651;
-    height: auto;
-    min-height: 220px;
-    width: auto;
-    min-width: 280px;
-    max-width: 380px;
-    border: none;
-    border-radius: 10px;
-    flex: 1 1 inherit;
-    justify-content: space-between;
-    align-items: center;
+.product-item {
+  color: aliceblue;
+  margin: 1rem 1.5rem;
+  padding: 15px 0px 0 0px;
+  background-color: #2d4651;
+  height: auto;
+  min-height: 220px;
+  width: auto;
+  min-width: 280px;
+  max-width: 380px;
+  border: none;
+  border-radius: 10px;
+  flex: 1 1 inherit;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.product-image{
-    min-height: 150;
-    margin: 0 0.5rem;
+.product-image {
+  height: 180px;
+  margin: 0 0.5rem;
 }
 
-.product-name{
-    font-size: 25px;
-    margin: 0.25rem 0;
+.product-name {
+  font-size: 25px;
+  margin: 0.25rem 0;
 }
 
-.product-price{
-    font-size: 1.25em;
-    margin: 0.25rem 0;
+.product-price {
+  font-size: 1.25em;
+  margin: 0.25rem 0;
 }
 
-.product-description{
-    font-size: 1.15em;
-    margin: 0.25rem 0;
-    padding: 0 0.5rem;
+.product-description {
+  font-size: 1.15em;
+  margin: 0.25rem 0;
+  padding: 0 0.5rem;
 }
 
 /* .product-details{
@@ -65,58 +68,69 @@ body{
     
 } */
 
-.product-function-holder{
-    height: 2rem;
-    color: rgb(109, 177, 236);
-    width: 100%;
-    border-radius: 10px;
-    border: none;
-    background-color: #2d4651;
-    transition: 0.2s ease-in-out;
+.cart-detail-container {
+  justify-content: space-between;
+  width: 100%;
 }
 
-.product-function-holder:hover{
-    cursor: pointer;
-    color: #9eed97;
-    background-image: linear-gradient(to top, #b7f4b1, #2d4651, #2d4651);
+.product-function-holder {
+  height: 2rem;
+  color: rgb(109, 177, 236);
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background-color: #2d4651;
+  transition: 0.2s ease-in-out;
 }
 
-.loadMore-btn{
-
-    font-size: large;
-    padding: 1rem auto;
-    margin: 0 2.5vw;
-    width: 95%;
-    border-radius: 10px;
-    border: none;
-    border-top: white 10px;
-    color: whitesmoke;
-    background-color: #0E2A36;
-    transition: 0.2s ease-in-out;
+.product-function-holder:hover {
+  cursor: pointer;
+  color: #9eed97;
+  background-image: linear-gradient(to top, #b7f4b1, #2d4651, #2d4651);
 }
 
-.loadMore-btn:hover{
-    cursor: pointer;
-    color: #9eed97;
-    background-color: #1f5a74;
+.loadMore-btn {
+  font-size: large;
+  padding: 1rem auto;
+  margin: 0 2.5vw;
+  width: 95%;
+  border-radius: 10px;
+  border: none;
+  border-top: white 10px;
+  color: whitesmoke;
+  background-color: #0e2a36;
+  transition: 0.2s ease-in-out;
 }
 
-.description-span{
-    font-size: 1.25em;
-    font-weight: bold;
-    text-decoration: dotted;
-    color: #2ee88e;
+.loadMore-btn:hover {
+  cursor: pointer;
+  color: #9eed97;
+  background-color: #1f5a74;
 }
 
-.flex{
-    display: flex;
+.description-span {
+  margin-bottom: 15px 0;
+  font-size: 1em;
+  color: #2ee88e;
 }
 
-.flex-column{
-    display: flex;
-    flex-direction: column;
+.success {
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #b3edae;
+  color: #10150d;
 }
 
-.hide{
-    display: none;
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
 }

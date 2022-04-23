@@ -5,10 +5,10 @@ body{
     background-color: whitesmoke;
 }
 
-.container{
+.container-settings{
     min-height: 90vh;
     height: auto;
-    width: 100vw;
+    width: 100%;
     color: aliceblue;
     /* padding: 2rem 1rem; */
     background-color: #202124;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/changePassword.css" />
+    <link rel="stylesheet" href="styles/setting.css" />
+    <title>settings</title>
+  </head>
+  <body>
+    <%- include("../partials/header", {userName: name, dp: dp}) %>
+    <div class="container-settings flex">
+      <div class="left-nav">
+        <div class="setting-list flex-column">
+          <a href="/admin?pageType=add-a-product" class="setting-item">
+            <h3>Add Product</h3>
+          </a>
+          <a href="/admin?pageType=update-product" class="setting-item">
+            <h3>Update Products</h3>
+          </a>
+        </div>
+      </div>
+      <div class="chosen-setting">
+        <div class="chosen-setting-item flex-column">
+          <% if (pageType === "add-a-product") { %> 
+            <%- include("addProduct", {error: ""}) %> 
+          <% } %> 
+          <% if (pageType === "update-product") { %> 
+            <%- include("updateProduct", {productList: productList}) %> 
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="scripts/products.js"></script>
+</html>

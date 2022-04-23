@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="styles/header.css">
 <div class="header flex">
   <h1 ><a href="/">Ecommerce Website :)</a></h1>
-  <div class="flex">
+  <div class="box flex">
       <div class="profile-pic">
           <img style="height: 10vh;" src="<%= dp %> " alt="Something went Wrong">
       </div>
@@ -16,6 +17,9 @@
                 </div>
             </button>
             <div id="my-Dropdown" class="dropdown-list flex-column hide">
+                <a href="/cart" class="my-cart-btn dropDown-item flex" id="my-cart-btn">
+                    My Cart
+                </a>
                 <a href="/settings" class="settings-btn dropDown-item flex" id="settings-btn">
                     Settings
                 </a>
@@ -26,3 +30,5 @@
         </div>
     </div>
 </div>
+<script src="scripts/header.js"></script>
+

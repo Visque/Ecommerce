@@ -1,0 +1,16 @@
+<div class="change-password flex-column">
+    <h1>Add A Product</h1>
+    <br>
+    <form class="change-password-form flex-column" action="/addProduct" method="post" enctype="multipart/form-data">
+        <% if (error) { %>
+            <%- include("../partials/error", {errors: error}) %> 
+        <% } %> 
+        <input type="text" name="name" placeholder="Enter product name">
+        <input type="file" name="image" placeholder="Enter product image">
+        <input type="text" name="price" placeholder="Enter product price">
+        <input type="text" name="description" placeholder="Enter product description">
+        <input type="number" min="0" name="quantity" placeholder="Enter product quantity">
+        <button id="submit-btn" class="btn safe" type="submit">Add</button>
+    </form>
+    
+</div>
